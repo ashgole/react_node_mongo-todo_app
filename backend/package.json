@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "node backend",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
   "keywords": [
     "node",
@@ -14,7 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "mongoose": "^8.2.4",
     "nodemon": "^3.1.0"
   }
 }
