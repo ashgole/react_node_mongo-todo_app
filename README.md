@@ -6,5 +6,4 @@ mongodb - https://cloud.mongodb.com/v2/6606f58a9739c56e084541ca#/metrics/replica
 
 postman - https://web.postman.co/workspace/My-Workspace~fa6bc0a9-a4f1-4fbb-869d-b40dcee39608/request/13125087-9898cb71-33fb-4fd4-93c5-f10d0028928e
 
-
-yt - 1.10.50
+frontend added - https://github.com/ashgole/react_node_mongo/tree/main/frontend
