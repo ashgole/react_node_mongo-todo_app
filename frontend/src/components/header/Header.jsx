@@ -17,15 +17,15 @@ const Header = () => {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link>
+        <Navbar>
           <Link to={"home"}>Home</Link>
-        </Navbar.Link>
-        <Navbar.Link>
+        </Navbar>
+        <Navbar>
           <Link to={"profile"}>Profile</Link>
-        </Navbar.Link>
-        <Navbar.Link>
+        </Navbar>
+        <Navbar>
           <Link to={"contactus"}>Contact Us</Link>
-        </Navbar.Link>
+        </Navbar>
       </Navbar.Collapse>
     </Navbar>
   );

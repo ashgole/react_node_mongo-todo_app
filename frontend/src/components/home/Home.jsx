@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../../features/todo/todoSlice";
+import { addTodo, removeTodo, updateTodo } from "../../features/todo/todoSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -8,36 +8,34 @@ const Home = () => {
 
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [updatedTodo, setUpdatedTodo] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
   const handleAddTask = () => {
     if (inputValue.trim() === "") return;
-    const updatedTasks = [...tasks, { id: Date.now(), text: inputValue }];
-    setTasks(updatedTasks);
     setInputValue("");
-    // dispatch(
-    //   addTodo({
-    //     id: todoList.todos.length + 1,
-    //     text: inputValue,
-    //   })
-    // );
-    // console.log("ok todoList", todoList);
+    dispatch(
+      addTodo({
+        id: todoList.todos.length,
+        text: inputValue,
+      })
+    );
   };
 
-  const handleUpdateTask = (id, text) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, text: newText } : task
-    );
-
-    setTasks(updatedTasks);
+  const handleUpdateTask = (id) => {
+    dispatch(updateTodo({ id, text: updatedTodo }));
     setEditIndex(null);
+    setUpdatedTodo("");
   };
 
   const handleDeleteTask = (id) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
+    dispatch(removeTodo({ id }));
   };
 
+  const handleEditIndex = (id, text) => {
+    setEditIndex(id);
+    setUpdatedTodo(text);
+  };
   return (
     <>
       <div className="max-w-md mx-auto mt-8">
@@ -45,7 +43,7 @@ const Home = () => {
         <input
           type="text"
           className="border border-gray-300 p-2 w-full mb-4"
-          placeholder="Add a task..."
+          placeholder="Add a todo..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
@@ -56,35 +54,35 @@ const Home = () => {
           Add Task
         </button>
         <ul>
-          {tasks.map((task) => (
-            <li key={task.id} className="border-b border-gray-300 py-2">
-              {editIndex === task.id ? (
+          {todoList.todos.map((todo, index) => (
+            <li key={index} className="border-b border-gray-300 py-2">
+              {editIndex === todo.id ? (
                 <>
                   <input
                     type="text"
                     className="border border-gray-300 p-1 mr-2"
-                    value={task.text}
-                    onChange={(e) => handleUpdateTask(task.id, e.target.value)}
+                    value={updatedTodo}
+                    onChange={(e) => setUpdatedTodo(e.target.value)}
                   />
                   <button
                     className="text-green-500 hover:text-green-600"
-                    onClick={() => handleUpdateTask(task.id, task.text)}
+                    onClick={() => handleUpdateTask(todo.id)}
                   >
                     Save
                   </button>
                 </>
               ) : (
                 <>
-                  <span>{task.text}</span>
+                  <span>{todo.text}</span>
                   <button
                     className="text-blue-500 hover:text-blue-600 ml-2"
-                    onClick={() => setEditIndex(task.id)}
+                    onClick={() => handleEditIndex(todo.id, todo.text)}
                   >
                     Edit
                   </button>
                   <button
                     className="text-red-500 hover:text-red-600 ml-2"
-                    onClick={() => handleDeleteTask(task.id)}
+                    onClick={() => handleDeleteTask(todo.id)}
                   >
                     Delete
                   </button>
