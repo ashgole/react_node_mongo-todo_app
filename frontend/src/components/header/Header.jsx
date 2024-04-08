@@ -26,6 +26,12 @@ const Header = () => {
         <Navbar>
           <Link to={"contactus"}>Contact Us</Link>
         </Navbar>
+        <Navbar>
+          <Link to={"signin"}>Signin</Link>
+        </Navbar>
+        <Navbar>
+          <Link to={"signup"}>Signup</Link>
+        </Navbar>
       </Navbar.Collapse>
     </Navbar>
   );
