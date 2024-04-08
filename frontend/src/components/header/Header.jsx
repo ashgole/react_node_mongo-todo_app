@@ -2,9 +2,22 @@ import React from "react";
 import { Navbar } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { postSignout } from "../../utils/api";
+import { SIGNOUT } from "../../utils/constants";
+import { removeToken } from "../../utils/token";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const userDetails = useSelector((state) => state.signinSlice);
+  const navigate = useNavigate();
+  const signoutHandler = async () => {
+    let response = await postSignout(SIGNOUT);
+    if (response.statusCode === 200) {
+      removeToken("accessToken");
+      removeToken("refreshToken");
+    }
+    navigate("./signin");
+  };
   return (
     <Navbar fluid rounded>
       <Navbar.Brand href="https://ashabb.netlify.app/">
@@ -39,7 +52,7 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Navbar>
+            <Navbar onClick={signoutHandler}>
               <Link to={"logout"}>Logout</Link>
             </Navbar>
           </>
