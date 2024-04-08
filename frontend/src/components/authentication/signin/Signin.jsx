@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setToken } from "../../../utils/token";
 import Button from "../../common/button/Button";
+import { postData } from "../../../utils/api";
+import { SIGNIN } from "../../../utils/constants";
+import { addUserAuth, setAuthentication } from "../../../features/auth/signinSlice";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -10,8 +13,8 @@ const Signin = () => {
   // const todos = useSelector(state => state.todos)
 
   const [userCred, setUserCred] = useState({
-    email: "",
-    password: "",
+    email: "ashish@gmail.com",
+    password: "12345",
   });
 
   const signinCred = (e) => {
@@ -21,14 +24,18 @@ const Signin = () => {
 
   const signinHandler = async (e) => {
     e.preventDefault();
-    // let response = await postSignin(userCred);
-    // if (response.status === 200) {
-    // setToken("token", response.data.token);
-    //   const userDetails = response.data.userDetails;
-    //   dispatch(addUserAuth(userDetails));
-    //   dispatch(setAuthentication(true));
-    //   navigate("/explore-metaverse");
-    // }
+    let response = await postData(SIGNIN, userCred);
+    if (response.statusCode === 200) {
+      setToken("refreshToken", response.data.refreshToken);
+      setToken("accessToken", response.data.accessToken);
+      const userDetails = {
+        username: response.data.user.username,
+        email: response.data.user.email,
+      };
+      dispatch(addUserAuth(userDetails));
+      dispatch(setAuthentication(true));
+      navigate("/home");
+    }
   };
 
   return (
@@ -55,6 +62,7 @@ const Signin = () => {
                     Email
                   </label>
                   <input
+                    value={"ashishgole@gmail.com"}
                     name="email"
                     onChange={signinCred}
                     type="email"
@@ -72,6 +80,7 @@ const Signin = () => {
                     Password
                   </label>
                   <input
+                    value={"12345"}
                     name="password"
                     onChange={signinCred}
                     id="password"
@@ -105,7 +114,7 @@ const Signin = () => {
                     </label>
                   </div>
                 </div>
-                <Button label={'Signin'} handler={signinHandler} />
+                <Button label={"Signin"} handler={signinHandler} />
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don't have an account?{" "}
                   <Link

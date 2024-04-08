@@ -8,5 +8,3 @@ export const getToken = (key) => {
 export const removeToken = (key) => {
     return window.localStorage.removeItem(key);
 }
-
-

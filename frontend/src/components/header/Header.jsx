@@ -1,8 +1,10 @@
 import React from "react";
 import { Navbar } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const userDetails = useSelector((state) => state.signinSlice);
   return (
     <Navbar fluid rounded>
       <Navbar.Brand href="https://ashabb.netlify.app/">
@@ -26,12 +28,22 @@ const Header = () => {
         <Navbar>
           <Link to={"contactus"}>Contact Us</Link>
         </Navbar>
-        <Navbar>
-          <Link to={"signin"}>Signin</Link>
-        </Navbar>
-        <Navbar>
-          <Link to={"signup"}>Signup</Link>
-        </Navbar>
+        {!userDetails.isAuthenticated ? (
+          <>
+            <Navbar>
+              <Link to={"signin"}>Signin</Link>
+            </Navbar>
+            <Navbar>
+              <Link to={"signup"}>Signup</Link>
+            </Navbar>
+          </>
+        ) : (
+          <>
+            <Navbar>
+              <Link to={"logout"}>Logout</Link>
+            </Navbar>
+          </>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Button from "../../common/button/Button";
 import { addUserAuth } from "../../../features/auth/signinSlice";
+import { postData } from "../../../utils/api.jsx";
+import { SIGNUP } from "../../../utils/constants.jsx";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -18,12 +20,7 @@ const Signup = () => {
   };
   const signupHandler = async (e) => {
     e.preventDefault();
-    // let response = await postSignup(userCred);
-    // dispatch(addUserAuth(response.data.userDetails));
-    dispatch(
-      addUserAuth(userCred)
-    );
-    // dispatch(setAuthentication(true))
+    let response = await postData(SIGNUP,userCred);
   };
 
   return (

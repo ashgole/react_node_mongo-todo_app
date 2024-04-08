@@ -65,14 +65,14 @@ const signin = asyncHandler(async (req, res) => {
     // access token & refresh token
     // send cookie
 
-    const { username, email, password } = req.body
+    const { email, password } = req.body
 
-    if (!username && !email) {
-        throw new ApiError(400, "username && email is required")
+    if (!email) {
+        throw new ApiError(400, "email is required")
     }
 
     const user = await User.findOne({
-        $or: [{ username }, { email }]
+        $or: [{ email }]
     })
 
     if (!user) {
@@ -186,9 +186,28 @@ const refreshAccessToken = () => asyncHandler(async (req, res) => {
 
 
 })
+
+const getUsers = asyncHandler(async (req, res) => {
+    const users = await User.find()
+    const usersMessage = users.length === 0 ? "users not availabel" : "all users fetched successfully..."
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                {
+                    users
+                },
+                usersMessage
+            )
+        )
+})
+
+
 export {
     signup,
     signin,
     signout,
-    refreshAccessToken
+    refreshAccessToken,
+    getUsers
 }

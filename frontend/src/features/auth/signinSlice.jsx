@@ -15,7 +15,6 @@ export const signinSlice = createSlice({
       state.isAuthenticated = action.payload;
     },
     addUserAuth: (state, action) => {
-      console.log("ok action", action.payload);
       const cred = {
         userid: nanoid(),
         email: action.payload.email,
