@@ -5,26 +5,31 @@ import asyncHandler from "../utils/asyncHandler.js";
 
 export const addTodo = asyncHandler(async (req, res) => {
     const { id, text } = req.body;
-    const todo = await Todo.findOne({
-        $or: [{ id }]
-    })
-    if (todo) {
-        todo.text = text;
-    }
-    else {
-        todo = await Todo.create({
-            id,
-            text
+    try {
+        const todo = await Todo.findOne({
+            $or: [{ id }]
         })
+        if (todo) {
+            todo.text = text;
+        }
+        else {
+            todo = await Todo.create({
+                id,
+                text
+            })
+        }
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    todo,
+                    "todo added successfully...")
+            )
+    } catch (error) {
+        throw new ApiError(400, error?.message || 'something went wrong.')
+
     }
-    return res
-        .status(200)
-        .json(
-            new ApiResponse(
-                200,
-                todo,
-                "todo added successfully...")
-        )
 })
 
 export const getTodos = asyncHandler(async (req, res) => {
@@ -38,7 +43,7 @@ export const getTodos = asyncHandler(async (req, res) => {
             )
         )
     } catch (error) {
-        throw new ApiError(400, error?.message || 'something went wrong')
+        throw new ApiError(400, error?.message || 'something went wrong.')
     }
 })
 
@@ -69,6 +74,6 @@ export const deleteTodo = asyncHandler(async (req, res) => {
             )
 
     } catch (error) {
-        throw new ApiError(400, error?.message || 'wrong input...')
+        throw new ApiError(400, error?.message || 'wrong input.')
     }
 })
