@@ -26,3 +26,24 @@ export const postSignout = async (endpoint) => {
     return error;
   }
 };
+
+export const postRefreshAccessToken = async (endpoint) => {
+  console.log('ok refersh',getToken("refreshToken") )
+  try {
+    const response = await axios.post(
+      LOCAL_URL + endpoint,
+      {
+        refreshToken: getToken("refreshToken"),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${getToken("refreshToken")}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error posting data:", error);
+    return error;
+  }
+};

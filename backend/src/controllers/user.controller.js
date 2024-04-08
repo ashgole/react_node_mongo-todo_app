@@ -142,23 +142,25 @@ const signout = asyncHandler(async (req, res) => {
         )
 })
 
-const refreshAccessToken = () => asyncHandler(async (req, res) => {
+const refreshAccessToken = asyncHandler(async (req, res) => {
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
 
-    if (incomingRefreshToken) {
+    if (!incomingRefreshToken) {
         throw new ApiError(400, 'unauthorized request')
     }
-
     try {
         const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET)
 
-        const user = await User.findById(decodedToken?._id)
+        const user = await User.findById(decodedToken?._id).select(
+            "-password"
+        )
+        console.log('ok user',user )
 
         if (!user) {
             throw new ApiError(400, 'Incalid refresh token')
         }
 
-        if (incomingRefreshToken !== user?.refreshToken) {
+        if (incomingRefreshToken != user?.refreshToken) {
             throw new ApiError(401, 'refresh token is expired or used')
         }
 
@@ -167,7 +169,7 @@ const refreshAccessToken = () => asyncHandler(async (req, res) => {
             secure: true
         }
 
-        const { accessToken, newRefreshToken } = await generateAccessAndRefreshToken(user._id)
+        const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
 
         return res
             .status(200)
@@ -176,7 +178,7 @@ const refreshAccessToken = () => asyncHandler(async (req, res) => {
             .json(
                 new ApiResponse(
                     200,
-                    { accessToken, refreshAccessToken: newRefreshToken },
+                    { user,accessToken, refreshToken },
                     "Access token refreshed"
                 )
             )

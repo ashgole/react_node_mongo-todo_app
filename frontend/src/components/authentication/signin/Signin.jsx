@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setToken } from "../../../utils/token";
-import Button from "../../common/button/Button";
 import { postData } from "../../../utils/api";
 import { SIGNIN } from "../../../utils/constants";
 import { addUserAuth, setAuthentication } from "../../../features/auth/signinSlice";
+import Button from "../../button/Button";
 
 const Signin = () => {
   const navigate = useNavigate();

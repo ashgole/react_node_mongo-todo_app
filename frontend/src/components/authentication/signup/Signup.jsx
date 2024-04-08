@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { postSignup } from "../../../common/axiosCalls/axiosInstance";
 import { useDispatch } from "react-redux";
-import Button from "../../common/button/Button";
-import { addUserAuth } from "../../../features/auth/signinSlice";
 import { postData } from "../../../utils/api.jsx";
 import { SIGNUP } from "../../../utils/constants.jsx";
+import Button from "../../button/Button.jsx";
 
 const Signup = () => {
   const dispatch = useDispatch();
