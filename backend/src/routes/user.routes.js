@@ -15,7 +15,6 @@ router.route("/refresh-token").post(refreshAccessToken)
 
 router.route("/addtodo").post(addTodo)
 router.route("/gettodos").post(getTodos)
-// router.route("/updatetodo").post(updateTodo)
 router.route("/deletetodo").post(deleteTodo)
 
 
