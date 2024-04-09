@@ -28,7 +28,6 @@ export const postSignout = async (endpoint) => {
 };
 
 export const postRefreshAccessToken = async (endpoint) => {
-  console.log('ok refersh',getToken("refreshToken") )
   try {
     const response = await axios.post(
       LOCAL_URL + endpoint,

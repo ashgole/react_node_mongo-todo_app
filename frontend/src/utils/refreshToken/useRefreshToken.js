@@ -12,7 +12,6 @@ const useRefreshToken = async () => {
       const response = await postRefreshAccessToken(REFRESH_TOKEN);
       setToken('accessToken', response.data.accessToken)
       setToken('refreshToken', response.data.refreshToken)
-      console.log('ok response',response )
       dispatch(addUserAuth(response.data.user));
       dispatch(setAuthentication(true))
     }

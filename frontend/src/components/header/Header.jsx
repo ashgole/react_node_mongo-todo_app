@@ -19,7 +19,7 @@ const Header = () => {
     navigate("./signin");
   };
   return (
-    <Navbar fluid rounded>
+    <Navbar className="sticky top-0" fluid rounded>
       <Navbar.Brand href="https://ashabb.netlify.app/">
         <img
           src="/logo.jpg"

@@ -154,7 +154,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         const user = await User.findById(decodedToken?._id).select(
             "-password"
         )
-        console.log('ok user',user )
 
         if (!user) {
             throw new ApiError(400, 'Incalid refresh token')
