@@ -17,3 +17,7 @@ flowbite-react - https://flowbite-react.com/docs/components/navbar
 `Reactjs` `frontend` `api` `crud` `axios` `redux` `redux-toolkit` `react-touter-dom` `todo-app` `registration` `signin` `signout`
 
 `Nodejs` `backend` `routes` `controllers` `models` `mongodb` `jwt` `secure-routes` `crud`
+
+![Signup 1](https://github.com/ashgole/react_node_mongo/blob/main/public/screenshots/1.png)
+![Signin 2](https://github.com/ashgole/react_node_mongo/blob/main/public/screenshots/2.png)
+![Homepage 3](https://github.com/ashgole/react_node_mongo/blob/main/public/screenshots/3.png)
