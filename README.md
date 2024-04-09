@@ -34,3 +34,15 @@ flowbite-react - https://flowbite-react.com/docs/components/navbar
 ![Signin 2](https://github.com/ashgole/react_node_mongo/blob/main/public/screenshots/2.png)
 ![Homepage 3](https://github.com/ashgole/react_node_mongo/blob/main/public/screenshots/3.png)
 ![Postman 3](https://github.com/ashgole/react_node_mongo/blob/main/public/screenshots/4.png)
+
+```
+working on ... Profile page
+
+cd frontend
+npm i
+npm run dev
+
+cd backend
+npm i
+npm run dev
+```
