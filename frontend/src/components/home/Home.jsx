@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTodo, removeTodo, updateTodo } from "../../features/todo/todoSlice";
 import { ADD_TODO, DELETE_TODO, GET_TODOS } from "../../utils/constants";
 import { postData } from "../../utils/api";
-
+import { isSignin } from "../../utils/token";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todoSlice);
 
@@ -13,6 +16,11 @@ const Home = () => {
   const [editIndex, setEditIndex] = useState(null);
 
   useEffect(() => {
+    if (!isSignin("refreshToken")) {
+      navigate("/signin");
+      return;
+    }
+
     const getTodoList = async () => {
       try {
         let reponse = await postData(GET_TODOS, "");

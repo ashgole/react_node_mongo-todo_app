@@ -4,7 +4,11 @@ import { getToken } from "./token.js";
 
 export const postData = async (endpoint, payload) => {
   try {
-    const response = await axios.post(LOCAL_URL + endpoint, payload);
+    const response = await axios.post(LOCAL_URL + endpoint, payload, {
+      headers: {
+        Authorization: `Bearer ${getToken("accessToken")}`,
+      },
+    });
     // console.log(response.data); // Log the response data
     return response.data;
   } catch (error) {

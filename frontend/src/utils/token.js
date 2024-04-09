@@ -8,3 +8,8 @@ export const getToken = (key) => {
 export const removeToken = (key) => {
     return window.localStorage.removeItem(key);
 }
+
+export const isSignin = (key) => {
+    let isTokenAvailable = window.localStorage.getItem(key);
+    return isTokenAvailable ? true : false
+}

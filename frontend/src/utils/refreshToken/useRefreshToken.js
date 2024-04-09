@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { postRefreshAccessToken } from '../api';
 import { addUserAuth, setAuthentication } from '../../features/auth/signinSlice';
 import { REFRESH_TOKEN } from '../constants';
-import { setToken } from '../token';
+import { isSignin, setToken } from '../token';
 
 const useRefreshToken = async () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    if (!isSignin("refreshToken")) {
+      return
+    }
     const fetchData = async () => {
       const response = await postRefreshAccessToken(REFRESH_TOKEN);
       setToken('accessToken', response.data.accessToken)
