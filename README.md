@@ -1,5 +1,5 @@
 <h1 align='center'>
-<a href="https://ashabb.netlify.app/">  We offer freelance web development using ReactJS, ThreeJS and NodeJS.</a>
+<a href="https://ashabb.netlify.app/">  We offer freelance web development using ReactJS, ThreeJS and NodeJS. ( MERN )</a>
 </h1>
 
 # REACT NODE MONGO
@@ -22,9 +22,11 @@ flowbite-react - https://flowbite-react.com/docs/components/navbar
 
 ## Tags
 
-`Reactjs` `frontend` `api` `vite` `tailwindcss` `crud` `axios` `redux` `redux-toolkit` `react-touter-dom` `todo-app` `registration` `signin` `signout`
+`MERN` `MERN app` `todo-app`
 
-`Nodejs` `backend` `routes` `controllers` `models` `mongodb` `jwt` `secure-routes` `crud`
+`frontend` - `Reactjs` `api` `vite` `tailwindcss` `crud` `axios` `redux` `redux-toolkit` `react-touter-dom` `registration` `signin` `signout`
+
+`backend` - `Nodejs` `routes` `controllers` `models` `mongodb` `jwt` `secure-routes` `crud`
 
 ## Screenshots
 
