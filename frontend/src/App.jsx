@@ -4,6 +4,8 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import Layout from "./components/layout/Layout";
 import NotFound from "./components/notFound/NotFound";
 import Profile from "./components/profile/Profile";
@@ -15,6 +17,7 @@ import Signup from "./components/authentication/signup/Signup";
 import useRefreshToken from "./utils/refreshToken/useRefreshToken";
 
 export default function App() {
+  const queryClient = new QueryClient();
   useRefreshToken();
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -29,5 +32,12 @@ export default function App() {
     )
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        {/* <ReactQueryDevtools /> */}
+      </QueryClientProvider>
+    </>
+  );
 }

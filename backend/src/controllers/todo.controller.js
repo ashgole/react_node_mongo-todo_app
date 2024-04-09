@@ -40,7 +40,7 @@ export const addTodo = asyncHandler(async (req, res) => {
 export const getTodos = asyncHandler(async (req, res) => {
     try {
         const todoList = await Todo.find()
-        res.status(200).json(
+        return res.status(200).json(
             new ApiResponse(
                 200,
                 {

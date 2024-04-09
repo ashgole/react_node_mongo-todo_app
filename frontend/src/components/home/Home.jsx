@@ -5,7 +5,49 @@ import { ADD_TODO, DELETE_TODO, GET_TODOS } from "../../utils/constants";
 import { postData } from "../../utils/api";
 import { isSignin } from "../../utils/token";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+
+const fetchData = async () => {
+  const response = await fetch("https://dummyjson.com/products");
+  const data = await response.json();
+  return data;
+};
+
 const Home = () => {
+  const { isLoading, error, refetch } = useQuery(
+    "todoList",
+    () => postData(GET_TODOS, ""),
+    {
+      enabled: false,
+      onSuccess: (data) => {
+        data?.data?.todoList.map((item) => {
+          dispatch(
+            addTodo({
+              id: item.id,
+              text: item.text,
+            })
+          );
+        });
+      },
+    }
+  );
+
+  const mutatePost = useMutation(
+    ["add todo"],
+    (todoPayload) => postData(ADD_TODO, todoPayload),
+    {
+      enabled: false,
+      onSuccess: (data) => {
+        dispatch(
+          addTodo({
+            id: data.data.id,
+            text: data.data.text,
+          })
+        );
+      },
+    }
+  );
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -20,46 +62,17 @@ const Home = () => {
       navigate("/signin");
       return;
     }
-
-    const getTodoList = async () => {
-      try {
-        let reponse = await postData(GET_TODOS, "");
-        reponse.data.count &&
-          reponse.data.todoList.map((item) => {
-            dispatch(
-              addTodo({
-                id: item.id,
-                text: item.text,
-              })
-            );
-          });
-      } catch (error) {
-        console.error("Error fetching todo list:", error);
-      }
-    };
-    getTodoList();
+    refetch();
   }, []);
 
   const handleAddTask = async () => {
     if (inputValue.trim() === "") return;
     setInputValue("");
-    try {
-      let todoPayload = {
-        id: todoList.todos.length,
-        text: inputValue,
-      };
-      let reponse = await postData(ADD_TODO, todoPayload);
-      if (reponse.statusCode === 200) {
-        dispatch(
-          addTodo({
-            id: reponse.data.id,
-            text: reponse.data.text,
-          })
-        );
-      }
-    } catch (error) {
-      console.error("Error while adding todo :", error);
-    }
+    let todoPayload = {
+      id: todoList.todos.length,
+      text: inputValue,
+    };
+    mutatePost.mutate(todoPayload);
   };
 
   const handleUpdateTask = async (id) => {
@@ -103,6 +116,13 @@ const Home = () => {
     setEditIndex(id);
     setUpdatedTodo(text);
   };
+
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
   return (
     <>
       <div className="h-screen text-white">
@@ -124,7 +144,22 @@ const Home = () => {
             Add Task
           </button>
         </div>
-        <div className="">
+        <div>
+          {isLoading && (
+            <div className="flex justify-center items-center mt-4">
+              Loading...
+            </div>
+          )}
+          {error && (
+            <div className="flex justify-center items-center mt-4">
+              Something went wrong while fetching todos...
+            </div>
+          )}
+          {mutatePost.isLoading && (
+            <div className="m-4 p-4 flex justify-center items-center mt-4 border">
+              Please wait adding new todo...
+            </div>
+          )}
           <div className="flex flex-wrap">
             {todoList.todos
               .slice()

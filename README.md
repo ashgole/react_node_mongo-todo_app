@@ -24,7 +24,7 @@ flowbite-react - https://flowbite-react.com/docs/components/navbar
 
 `MERN` `MERN app` `todo-app`
 
-`frontend` - `Reactjs` `api` `vite` `tailwindcss` `crud` `axios` `redux` `redux-toolkit` `react-touter-dom` `registration` `signin` `signout`
+`frontend` - `Reactjs` `api` `vite` `tailwindcss` `crud` `axios` `redux` `redux-toolkit` `react-query` `useQuery` `useMutation` `react-touter-dom` `registration` `signin` `signout`
 
 `backend` - `Nodejs` `routes` `controllers` `models` `mongodb` `jwt` `secure-routes` `crud`
 
