@@ -103,25 +103,26 @@ const Home = () => {
     setEditIndex(id);
     setUpdatedTodo(text);
   };
-
   return (
     <>
       <div className="h-screen text-white">
         <div className="p-4  max-w-md mx-auto">
-          <h1 className="text-2xl font-bold mb-4">Todo List</h1>
-           <input
-              type="text"
-              className="text-black border border-gray-300 p-2 w-full mb-4"
-              placeholder="Add a todo..."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
-              onClick={handleAddTask}
-            >
-              Add Task
-            </button>
+          <h1 className="text-2xl font-bold mb-4">
+            Todo List : {todoList.todos.length}
+          </h1>
+          <input
+            type="text"
+            className="text-black border border-gray-300 p-2 w-full mb-4"
+            placeholder="Add a todo..."
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
+            onClick={handleAddTask}
+          >
+            Add Task
+          </button>
         </div>
         <div className="">
           <div className="flex flex-wrap">
@@ -152,7 +153,7 @@ const Home = () => {
                     ) : (
                       <>
                         <div className="p-2 h-auto text-wrap break-words">
-                          {todo.text}
+                          {index + 1} : {todo.text}
                         </div>
                         <div className="p-2">
                           <button

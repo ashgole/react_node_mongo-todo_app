@@ -9,3 +9,11 @@ postman - https://web.postman.co/workspace/My-Workspace~fa6bc0a9-a4f1-4fbb-869d-
 frontend added - https://github.com/ashgole/react_node_mongo/tree/main/frontend
 
 flowbite-react - https://flowbite-react.com/docs/components/navbar
+
+# This Project is only for educationl purpose
+
+# Tags
+
+`Reactjs` `frontend` `api` `crud` `axios` `redux` `redux-toolkit` `react-touter-dom` `todo-app` `registration` `signin` `signout`
+
+`Nodejs` `backend` `routes` `controllers` `models` `mongodb` `jwt` `secure-routes` `crud`
