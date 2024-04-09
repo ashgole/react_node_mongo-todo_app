@@ -19,40 +19,46 @@ const Header = () => {
     navigate("./signin");
   };
   return (
-    <Navbar className="sticky top-0" fluid rounded>
+    <Navbar
+      className="bg-gray-800 sticky top-0 text-white bg-opacity-90"
+      fluid
+    >
       <Navbar.Brand href="https://ashabb.netlify.app/">
         <img
           src="/logo.jpg"
           className="mr-3 h-6 sm:h-9"
           alt="Flowbite React Logo"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+        <span className="self-center whitespace-nowrap text-xl font-semibold">
           TODO App
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar>
+        <Navbar className="bg-opacity-0 bg-gray-800">
           <Link to={"home"}>Home</Link>
         </Navbar>
-        <Navbar>
+        <Navbar className="bg-opacity-0 bg-gray-800">
           <Link to={"profile"}>Profile</Link>
         </Navbar>
-        <Navbar>
+        <Navbar className="bg-opacity-0 bg-gray-800">
           <Link to={"contactus"}>Contact Us</Link>
         </Navbar>
         {!userDetails.isAuthenticated ? (
           <>
-            <Navbar>
+            <Navbar className="bg-opacity-0 bg-gray-800">
               <Link to={"signin"}>Signin</Link>
             </Navbar>
-            <Navbar>
+            <Navbar className="bg-opacity-0 bg-gray-800">
               <Link to={"signup"}>Signup</Link>
             </Navbar>
           </>
         ) : (
           <>
-            <Navbar onClick={signoutHandler}>
+            <Navbar
+              className="bg-opacity-0 bg-gray-800"
+              onClick={signoutHandler}
+            >
               <Link to={"logout"}>Logout</Link>
             </Navbar>
           </>

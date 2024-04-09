@@ -2,7 +2,7 @@ import {
   Route,
   RouterProvider,
   createBrowserRouter,
-  createRoutesFromElements
+  createRoutesFromElements,
 } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import NotFound from "./components/notFound/NotFound";
@@ -29,9 +29,5 @@ export default function App() {
     )
   );
 
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }

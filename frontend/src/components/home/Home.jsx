@@ -106,62 +106,74 @@ const Home = () => {
 
   return (
     <>
-      <div className="h-screen max-w-md mx-auto mt-8">
-        <div className="h-1/4 ">
+      <div className="h-screen text-white">
+        <div className="p-4  max-w-md mx-auto">
           <h1 className="text-2xl font-bold mb-4">Todo List</h1>
-          <input
-            type="text"
-            className="border border-gray-300 p-2 w-full mb-4"
-            placeholder="Add a todo..."
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
-            onClick={handleAddTask}
-          >
-            Add Task
-          </button>
+           <input
+              type="text"
+              className="text-black border border-gray-300 p-2 w-full mb-4"
+              placeholder="Add a todo..."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
+              onClick={handleAddTask}
+            >
+              Add Task
+            </button>
         </div>
-        <div className="h-3/4 overflow-auto">
-          <ul>
-            {todoList.todos.map((todo, index) => (
-              <li key={index} className="border-b border-gray-300 py-2">
-                {editIndex === todo.id ? (
-                  <>
-                    <input
-                      type="text"
-                      className="border border-gray-300 p-1 mr-2"
-                      value={updatedTodo}
-                      onChange={(e) => setUpdatedTodo(e.target.value)}
-                    />
-                    <button
-                      className="text-green-500 hover:text-green-600"
-                      onClick={() => handleUpdateTask(todo.id)}
-                    >
-                      Save
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <span>{todo.text}</span>
-                    <button
-                      className="text-blue-500 hover:text-blue-600 ml-2"
-                      onClick={() => handleEditIndex(todo.id, todo.text)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="text-red-500 hover:text-red-600 ml-2"
-                      onClick={() => handleDeleteTask(todo.id)}
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
+        <div className="">
+          <div className="flex flex-wrap">
+            {todoList.todos
+              .slice()
+              .reverse()
+              .map((todo, index) => (
+                <div
+                  key={index}
+                  className=" py-2 w-full md:w-1/2 lg:w-1/3 h-auto p-4"
+                >
+                  <div className="border h-full p-2">
+                    {editIndex === todo.id ? (
+                      <>
+                        <input
+                          type="text"
+                          className="text-black border border-gray-300 p-1 mr-2"
+                          value={updatedTodo}
+                          onChange={(e) => setUpdatedTodo(e.target.value)}
+                        />
+                        <button
+                          className="text-green-500 hover:text-green-600"
+                          onClick={() => handleUpdateTask(todo.id)}
+                        >
+                          Save
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-2 h-auto text-wrap break-words">
+                          {todo.text}
+                        </div>
+                        <div className="p-2">
+                          <button
+                            className="text-blue-500 hover:text-blue-600"
+                            onClick={() => handleEditIndex(todo.id, todo.text)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="text-red-500 hover:text-red-600 ml-2"
+                            onClick={() => handleDeleteTask(todo.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </>
