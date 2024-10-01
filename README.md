@@ -1,7 +1,6 @@
 <h1 align='center'>
-<a href="https://ashabb.netlify.app/" target="_blank"> We offer freelance web development using MERN, NextJS and ThreeJS.</a>
+<a href="https://www.ashabb.com" target="_blank"> We offer freelance web development using MERN, NextJS and ThreeJS.</a>
 </h1>
-
 # REACT NODE MONGO
 
 ### This Project is built only for educationl purpose
